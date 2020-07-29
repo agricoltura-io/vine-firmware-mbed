@@ -1,13 +1,21 @@
 #include <mbed.h>
+#include <USBCDC.h>
 
 int main() {
 
   // put your setup code here, to run once:
 
   // Standard Variable Declariations
-  // Stores that state of the relay switch, for relay control function return value
-  int Relay_1_State=0;
-  int Relay_2_State=0;
+  uint8_t Relay_1_State=0;
+  uint8_t Relay_2_State=0;
+  uint8_t RS485_Port1_Term_State = 0;
+  uint8_t RS485_Port2_Term_State = 0;
+  
+
+  // USB VCOM Port Related Variables
+  unsigned int USB_COM_DATA[6] = {};                  // Data Array
+  uint8_t* p_USB_COM_DATA = (uint8_t*)USB_COM_DATA;   // write pointer
+  uint32_t USB_size_read;                             // the number of bytes actually received
 
   // Serial Object declarations 
   // I2C Ports 
@@ -17,9 +25,8 @@ int main() {
   BufferedSerial SENSE_UART(PB_10, PC_5, MBED_CONF_PLATFORM_DEFAULT_SERIAL_BAUD_RATE);
   BufferedSerial RS485_ONE_UART(PA_0, PA_1, MBED_CONF_PLATFORM_DEFAULT_SERIAL_BAUD_RATE);
   BufferedSerial RS485_TWO_UART(PA_2,PA_3, MBED_CONF_PLATFORM_DEFAULT_SERIAL_BAUD_RATE);
-
-  //USBSerial USB_Port();
-
+  //USB Virtual COM Port 
+  USBCDC USP_Port();
 
 
   //IO Pin Declarations
@@ -32,32 +39,79 @@ int main() {
   DigitalInOut USW1_EN(PB_0);
   DigitalInOut USW1_S0(PB_1);
   DigitalInOut USW1_S1(PB_2);
+
   //RS485 Transceiver 1 control lines
-  DigitalInOut RS485_TERM_EN2(PA_4);
-  DigitalInOut RS485_UART_DE2(PA_6);
-  DigitalInOut RS485_UART_RE2(PA_5);
-  DigitalInOut RS485_SL_RATE2(PA_7);
-  //RS485 Transceiver 2 control lines
   DigitalInOut RS485_TERM_EN1(PC_0);
   DigitalInOut RS485_UART_DE1(PC_2);
   DigitalInOut RS485_UART_RE1(PC_1);
   DigitalInOut RS485_SL_RATE1(PC_3);
-
-  //Function Prototypes
-  // Use RS485 port
-  void RS485_Transceive(int portNum, int data);
-  int RS485_RX(int portNum);
-  // Selecting I2C mux output and control of sensors
-  int I2C_SenseControl(int SensorPortNum);
-  // Control of I2C GPIO expander
-  void I2C_IO_Control(int IO_PortNum, int PinState);
-  // Relay Control 
-  int Relay_Switch_Control();
+  //RS485 Transceiver 2 control lines
+  DigitalInOut RS485_TERM_EN2(PA_4);
+  DigitalInOut RS485_UART_DE2(PA_6);
+  DigitalInOut RS485_UART_RE2(PA_5);
+  DigitalInOut RS485_SL_RATE2(PA_7);
 
   // MAIN LOOP
   while(1) {
     // put your main code here, to run repeatedly:
+    
   }// End Main While Loop
 
 
+
+
 }// end main
+
+// User Defined Functions
+// Use RS485 port
+void RS485_TX(uint8_t portNum, uint8_t data)
+{
+  // Shit goes here
+}
+
+uint8_t RS485_RX(uint8_t portNum)
+{
+  return 0; // temp return 0
+}
+
+uint8_t RS485_Term_Set(uint8_t portNum, uint8_t termState)
+{
+  if (portNum == 1)
+  {
+    if (termState == 0)
+    {
+      // RS485_TERM_EN1.write(0);
+    }
+    else if (termState == 1)
+    {
+      // RS485_TERM_EN1.write(1);
+    }
+  }// end if
+  else
+  {
+    if (termState == 0)
+    {
+      // RS485_TERM_EN2.write(0);
+    }
+    else if (termState == 1)
+    {
+      // RS485_TERM_EN2.write(1);
+    }
+  }// end else
+  return 0;
+}
+
+// Selecting I2C mux output and control of sensors
+uint8_t I2C_SenseControl(uint8_t SensorPortNum)
+{
+  return 0;
+}
+// Control of I2C GPIO expander
+void I2C_IO_Control(uint8_t IO_PortNum, uint8_t PinState)
+{
+}
+// Relay Control
+uint8_t Relay_Switch_Control(uint8_t state_to_switch)
+{
+  return 0;
+}

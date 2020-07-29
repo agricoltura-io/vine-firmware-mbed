@@ -1,6 +1,15 @@
 #include <MAX13450.h>
 #include <stdarg.h>
 
+
+typedef unsigned int word;
+typedef uint8_t byte;
+typedef uint8_t boolean;
+typedef void (*voidFuncPtr)(void);
+Timer lapse;
+    const byte STX = '\2';
+    const byte ETX = '\3';
+
 MAX13450::MAX13450(PinName tx, PinName rx, PinName re, PinName term, PinName de)
     : BufferedSerial(tx, rx)
 {

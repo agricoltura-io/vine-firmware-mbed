@@ -3,6 +3,7 @@
 
 #include <mbed.h>
 #include <BufferedSerial.h>
+#include <DigitalInOut.h>
 
 class MAX13450 : public BufferedSerial
 {
@@ -11,6 +12,9 @@ private:
     typedef uint8_t byte;
     typedef uint8_t boolean;
     typedef void (*voidFuncPtr)(void);
+    DigitalInOut RS485_RE;
+    DigitalInOut RS485_DE;
+    DigitalInOut RS485_TERM;
 
 public:
     // Create a BufferedSerial port, and DigitalInOut ports for RS485 chip control 

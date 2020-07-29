@@ -63,43 +63,6 @@ int main() {
 }// end main
 
 // User Defined Functions
-// Use RS485 port
-void RS485_TX(uint8_t portNum, uint8_t data)
-{
-  // Shit goes here
-}
-
-uint8_t RS485_RX(uint8_t portNum)
-{
-  return 0; // temp return 0
-}
-
-uint8_t RS485_Term_Set(uint8_t portNum, uint8_t termState)
-{
-  if (portNum == 1)
-  {
-    if (termState == 0)
-    {
-      // RS485_TERM_EN1.write(0);
-    }
-    else if (termState == 1)
-    {
-      // RS485_TERM_EN1.write(1);
-    }
-  }// end if
-  else
-  {
-    if (termState == 0)
-    {
-      // RS485_TERM_EN2.write(0);
-    }
-    else if (termState == 1)
-    {
-      // RS485_TERM_EN2.write(1);
-    }
-  }// end else
-  return 0;
-}
 
 // Selecting I2C mux output and control of sensors
 uint8_t I2C_SenseControl(uint8_t SensorPortNum)
